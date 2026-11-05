@@ -1,0 +1,19 @@
+# Production overlay:  --spring.profiles.active=prod
+# No defaults: every secret must come from the environment, so a misconfigured server fails at startup.
+spring:
+  datasource:
+    url: ${PLMS_DB_URL}
+    username: ${PLMS_DB_USER}
+    password: ${PLMS_DB_PASSWORD}
+
+plms:
+  security:
+    jwt-secret: ${PLMS_JWT_SECRET}
+  seed:
+    enabled: false
+
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: false

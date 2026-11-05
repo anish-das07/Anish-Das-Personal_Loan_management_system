@@ -1,0 +1,33 @@
+# Tests never touch MySQL: in-memory H2 (MySQL mode), schema generated from the entities.
+spring:
+  datasource:
+    url: jdbc:h2:mem:plms-test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1;LOCK_TIMEOUT=10000
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  flyway:
+    enabled: false
+
+plms:
+  security:
+    jwt-secret: test-only-secret-0123456789abcdef-0123456789
+  documents:
+    storage-dir: ${java.io.tmpdir}/plms-test-documents
+    max-bytes: 5242880
+  credit:
+    timeout: 300ms
+    retry-attempts: 2
+    circuit-window-size: 4
+    circuit-failure-rate: 50
+    circuit-wait-open: 60s
+  seed:
+    enabled: true
+    staff-password: Test-Staff-2026
+  overdue-cron: "-"
+
+logging:
+  level:
+    root: WARN
